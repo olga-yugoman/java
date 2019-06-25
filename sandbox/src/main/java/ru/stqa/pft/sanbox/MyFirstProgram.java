@@ -6,24 +6,15 @@ public class MyFirstProgram {
         hello("user");
         hello("www");
 
-        double a = 5;
-        System.out.println("Прощадь квадрата со стороной " + a + " = " + area(a));
+        Square s = new Square(5);
+        System.out.println("Прощадь квадрата со стороной " + s.m + " = " + s.area());
 
-        double c = 5;
-        double d = 3;
-        System.out.println("Прощадь прямоугольника со сторонами " + c + " и " + d + " = " + area(c, d));
+        Rectangle r = new Rectangle(3, 4);
+        System.out.println("Прощадь прямоугольника со сторонами " + r.a + " и " + r.b + " = " + r.area());
 
     }
 
 	public static void hello(String somebody){
         System.out.println("Hello, " + somebody + "!");
-    }
-
-    public static double area(double a){
-        return a * a;
-    }
-
-    public static double area(double a, double b){
-        return a * b;
     }
 }
