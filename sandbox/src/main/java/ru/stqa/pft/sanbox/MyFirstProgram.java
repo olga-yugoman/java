@@ -11,7 +11,6 @@ public class MyFirstProgram {
 
         Rectangle r = new Rectangle(3, 4);
         System.out.println("Прощадь прямоугольника со сторонами " + r.a + " и " + r.b + " = " + r.area());
-
     }
 
 	public static void hello(String somebody){
