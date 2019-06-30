@@ -30,6 +30,16 @@ public class GroupHelper extends HelperBase {
         click(By.name("delete"));
     }
 
+    /******************************GROUP MODIFICATION*************************/
+
+    public void initGroupModification() {
+        click(By.name("edit"));
+    }
+
+    public void submitGroupModification() {
+        click(By.name("update"));
+    }
+
     /******************************COMMON*************************/
     public void returntoGroupPage() {
         click(By.linkText("group page"));
@@ -38,4 +48,5 @@ public class GroupHelper extends HelperBase {
     public void selectGroup() {
         click(By.name("selected[]"));
     }
+
 }
