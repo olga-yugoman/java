@@ -25,6 +25,13 @@ public class GroupHelper extends HelperBase {
         type(By.name("group_footer"), groupData.getFooter());
     }
 
+    public void createGroup(GroupData group) {
+        initGroupCreation();
+        fillGroupForm(group);
+        submitGroupCreation();
+        returntoGroupPage();
+    }
+
     /******************************GROUP DELETION******************/
      public void deleteSelectedGroups() {
         click(By.name("delete"));
@@ -49,4 +56,7 @@ public class GroupHelper extends HelperBase {
         click(By.name("selected[]"));
     }
 
+    public boolean isThereAGroup() {
+        return isElementPresent(By.name("selected[]"));
+    }
 }
