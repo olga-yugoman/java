@@ -4,6 +4,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import ru.stqa.pft.addressbook.model.GroupData;
 
+import java.util.List;
+
 public class GroupHelper extends HelperBase {
 
     public GroupHelper(WebDriver wd) {
@@ -32,10 +34,12 @@ public class GroupHelper extends HelperBase {
         returntoGroupPage();
     }
 
+
     /******************************GROUP DELETION******************/
      public void deleteSelectedGroups() {
         click(By.name("delete"));
     }
+
 
     /******************************GROUP MODIFICATION*************************/
 
@@ -46,6 +50,7 @@ public class GroupHelper extends HelperBase {
     public void submitGroupModification() {
         click(By.name("update"));
     }
+
 
     /******************************COMMON*************************/
     public void returntoGroupPage() {
@@ -58,5 +63,9 @@ public class GroupHelper extends HelperBase {
 
     public boolean isThereAGroup() {
         return isElementPresent(By.name("selected[]"));
+    }
+
+    public int getGroupCount() {
+        return  wd.findElements(By.name("selected[]")).size();
     }
 }
