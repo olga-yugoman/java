@@ -38,11 +38,11 @@ public class ApplicationManager {
         sessionHelper.login("admin", "secret");
     }
 
-    public NavigationHelper getNavigationHelper() {
+    public NavigationHelper goTo() {
         return navigationHelper;
     }
 
-    public GroupHelper getGroupHelper() {
+    public GroupHelper group() {
         return groupHelper;
     }
 
