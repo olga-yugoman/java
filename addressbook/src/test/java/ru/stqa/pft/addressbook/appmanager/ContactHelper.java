@@ -30,9 +30,11 @@ public class ContactHelper extends HelperBase {
         type(By.name("lastname"), contactData.getSurname());
         type(By.name("address"), contactData.getAddress());
         type(By.name("home"), contactData.getHomePhone());
+        type(By.name("mobile"), contactData.getMobilePhone());
+        type(By.name("work"), contactData.getWorkPhone());
         type(By.name("email"), contactData.getEmail());
 
-        if(creation) {
+        if (creation) {
             new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
         } else {
             Assert.assertFalse(isElementPresent(By.name("new_group")));
@@ -43,7 +45,7 @@ public class ContactHelper extends HelperBase {
         click(By.xpath("(//input[@type='submit'])"));
     }
 
-    public void create (ContactData contact, boolean creation) {
+    public void create(ContactData contact, boolean creation) {
         initContactCreation();
         fillContactForm(contact, creation);
         submitContactForm();
@@ -101,7 +103,7 @@ public class ContactHelper extends HelperBase {
     }
 
     public int count() {
-        return  wd.findElements(By.name("selected[]")).size();
+        return wd.findElements(By.name("selected[]")).size();
     }
 
     private Contacts contactCache = null;
@@ -117,9 +119,9 @@ public class ContactHelper extends HelperBase {
                 int id = Integer.parseInt(cells.get(0).findElement(By.tagName("input")).getAttribute("value"));
                 String name = cells.get(2).getText();
                 String surname = cells.get(1).getText();
-                String[] phones = cells.get(5).getText().split("\n");
+                String allPhones = cells.get(5).getText();
                 contactCache.add(new ContactData().withId(id).withFirstName(name).withSurname(surname)
-                        .withHomePhone(phones[0]).withMobilePhone(phones[1]).withWorkPhone(phones[2]));
+                        .withAllPhones(allPhones));
             }
             return contactCache;
         }
