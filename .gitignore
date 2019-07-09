@@ -15,3 +15,5 @@ gradle-app.setting
 # gradle/wrapper/gradle-wrapper.properties
 .idea/misc.xml
 .idea/workspace.xml
+addressbook/.idea/misc.xml
+addressbook/.idea/workspace.xml
