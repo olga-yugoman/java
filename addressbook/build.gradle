@@ -10,6 +10,7 @@ dependencies {
     implementation 'org.hamcrest:hamcrest:2.1'
     implementation 'com.beust:jcommander:1.72'
     implementation 'com.thoughtworks.xstream:xstream:1.4.11.1'
+    implementation 'mysql:mysql-connector-java:8.0.16'
 }
 
 task testGroup(type: Test) {
