@@ -29,6 +29,7 @@ public class DbHelper {
         session.getTransaction().commit();
         session.close();
         return new Groups(result);
+
     }
 
     public Contacts contacts() {
