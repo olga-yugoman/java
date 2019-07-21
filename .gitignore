@@ -17,3 +17,4 @@ gradle-app.setting
 .idea/workspace.xml
 addressbook/.idea/misc.xml
 addressbook/.idea/workspace.xml
+*.log
