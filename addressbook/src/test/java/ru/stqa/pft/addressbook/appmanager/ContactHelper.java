@@ -98,14 +98,25 @@ public class ContactHelper extends HelperBase {
 
     /****************************************CONNECTION WITH GROUPS*********************************/
 
-    public void addToGroup(ContactData contactToAdd, GroupData group) {
-        selectContactById(contactToAdd.getId());
+    public void addToGroup(ContactData contact, GroupData group) {
+        selectContactById(contact.getId());
         selectGroupByIdFromDropdown(group.getId());
         click(By.name("add"));
     }
 
     public void selectGroupByIdFromDropdown(int id) {
         new Select(wd.findElement(By.name("to_group"))).selectByValue(String.valueOf(id));
+    }
+
+
+    public void pageFilteredByGroup(GroupData group) {
+        click(By.linkText(String.format("group page \"%s\"", group.getName())));
+    }
+
+
+    public void removeFromGroup(ContactData contact) {
+        selectContactById(contact.getId());
+        wd.findElement(By.name("remove")).click();
     }
 
     /****************************************COMMON*********************************/
