@@ -17,11 +17,8 @@ public class ContactEmailTests extends TestBase {
     @BeforeMethod
     public void ensurePrecondition() {
         if (app.contact().all().size() == 0) {
-            Groups groups = app.db().groups();
-            File photo = new File("src/test/resources/stud.png");
             app.contact().create(new ContactData().withFirstName("Olga").withSurname("Yugoman")
-                    .withEmail("q@q.ru").withEmail2("wwww@qaz.com").withEmail3("wwww@qaz.com")
-                    .withPhoto(photo).inGroup(groups.iterator().next()), true);
+                    .withEmail("q@q.ru").withEmail2("wwww@qaz.com").withEmail3("wwww@qaz.com"), true);
         }
     }
 

@@ -18,11 +18,8 @@ public class ContactPhoneTests extends TestBase {
     @BeforeMethod
     public void ensurePrecondition() {
         if (app.contact().all().size() == 0) {
-            Groups groups = app.db().groups();
-            File photo = new File("src/test/resources/stud.png");
             app.contact().create(new ContactData().withFirstName("Olga").withSurname("Yugoman")
-                    .withHomePhone("0981223344").withMobilePhone("+71112223344").withWorkPhone("7 77")
-                    .withPhoto(photo).inGroup(groups.iterator().next()), true);
+                    .withHomePhone("0981223344").withMobilePhone("+71112223344").withWorkPhone("7 77"), true);
         }
     }
 
