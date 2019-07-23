@@ -19,6 +19,7 @@
     <orderEntry type="library" name="Gradle: ch.qos.logback:logback-classic:1.2.3" level="project" />
     <orderEntry type="library" name="Gradle: mysql:mysql-connector-java:8.0.16" level="project" />
     <orderEntry type="library" name="Gradle: org.hibernate:hibernate-core:5.4.3.Final" level="project" />
+    <orderEntry type="library" name="Gradle: biz.futureware.mantis:mantis-axis-soap-client:1.2.19" level="project" />
     <orderEntry type="library" name="Gradle: com.beust:jcommander:1.72" level="project" />
     <orderEntry type="library" name="Gradle: org.apache-extras.beanshell:bsh:2.0b6" level="project" />
     <orderEntry type="library" name="Gradle: org.seleniumhq.selenium:selenium-chrome-driver:3.141.59" level="project" />
@@ -36,6 +37,8 @@
     <orderEntry type="library" name="Gradle: com.squareup.okhttp3:okhttp:3.11.0" level="project" />
     <orderEntry type="library" name="Gradle: com.squareup.okio:okio:1.14.0" level="project" />
     <orderEntry type="library" name="Gradle: org.apache.httpcomponents:httpcore:4.4.11" level="project" />
+    <orderEntry type="library" name="Gradle: axis:axis:1.4" level="project" />
+    <orderEntry type="library" name="Gradle: commons-discovery:commons-discovery:0.2" level="project" />
     <orderEntry type="library" name="Gradle: commons-logging:commons-logging:1.2" level="project" />
     <orderEntry type="library" name="Gradle: commons-codec:commons-codec:1.11" level="project" />
     <orderEntry type="library" name="Gradle: javax.mail:mail:1.4.4" level="project" />
@@ -64,5 +67,8 @@
     <orderEntry type="library" name="Gradle: com.sun.istack:istack-commons-runtime:3.0.7" level="project" />
     <orderEntry type="library" name="Gradle: org.jvnet.staxex:stax-ex:1.8" level="project" />
     <orderEntry type="library" name="Gradle: com.sun.xml.fastinfoset:FastInfoset:1.2.15" level="project" />
+    <orderEntry type="library" name="Gradle: axis:axis-wsdl4j:1.5.1" level="project" />
+    <orderEntry type="library" name="Gradle: org.apache.axis:axis-jaxrpc:1.4" level="project" />
+    <orderEntry type="library" name="Gradle: org.apache.axis:axis-saaj:1.4" level="project" />
   </component>
 </module>
