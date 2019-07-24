@@ -1,6 +1,7 @@
 package ru.stqa.pft.addressbook.tests;
 
 import org.hamcrest.CoreMatchers;
+import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
@@ -8,7 +9,8 @@ import ru.stqa.pft.addressbook.model.Contacts;
 import ru.stqa.pft.addressbook.model.GroupData;
 import ru.stqa.pft.addressbook.model.Groups;
 
-import static org.hamcrest.CoreMatchers.*;
+import java.util.stream.Collector;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class RemoveContactFromGroupTest extends TestBase {
@@ -30,15 +32,39 @@ public class RemoveContactFromGroupTest extends TestBase {
 
     @Test
     public void RemoveContactFromGroupTest() {
-        Contacts allContacts = app.db().contacts();
+        //Получаем из БД список всех констактов и групп и выбираем контакт для теста
+        Contacts allContactsBeforeTest = app.db().contacts();
         Groups groups = app.db().groups();
-        ContactData contact = allContacts.iterator().next();
-        GroupData group = groups.iterator().next();
-        app.contact().addToGroup(contact, group);
-        app.contact().pageFilteredByGroup(group);
+        ContactData contactBefore = allContactsBeforeTest.iterator().next();
 
-        app.contact().removeFromGroup(contact);
+        //проверяем наличие групп у контакта, если нет - добавляем в группу
+        if (contactBefore.getGroups().size() == 0) {
+            GroupData group = groups.iterator().next();
+            app.contact().addToGroup(contactBefore, group);
+            app.goTo().homePage();
+        }
 
-        assertThat(contact.getGroups(), not(group));
-    }
+        //получаем список групп контакта и выбираем одну
+        Groups groupsOfContact = contactBefore.getGroups();
+        GroupData group = groupsOfContact.iterator().next();
+
+        //фильтруем страницу приложения по группам
+        app.contact().filterPageByGroup(group.getId());
+
+        //удаляем контакт из группы
+        app.contact().removeFromGroup(contactBefore);
+
+        //получаем заново контакты из БД и выбираем контакт из теста
+        Contacts allContactsAfterTest = app.db().contacts();
+        Assert.assertEquals(allContactsAfterTest, allContactsBeforeTest, "Contacts in DB are not equal");
+
+        /*ContactData contact = allContactsAfterTest
+                .stream()
+                .filter(c -> contactBefore.getId() == c.getId())
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException(String.format("Contact with id %s was not found", contactBefore.getId())));
+
+        Assert.assertTrue(contact.getGroups()
+                .stream().noneMatch(g -> group.getId() == g.getId()));*/
+ }
 }

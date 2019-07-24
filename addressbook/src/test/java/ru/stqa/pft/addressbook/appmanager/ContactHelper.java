@@ -108,9 +108,8 @@ public class ContactHelper extends HelperBase {
         new Select(wd.findElement(By.name("to_group"))).selectByValue(String.valueOf(id));
     }
 
-
-    public void pageFilteredByGroup(GroupData group) {
-        click(By.linkText(String.format("group page \"%s\"", group.getName())));
+    public void filterPageByGroup(int id) {
+        new Select(wd.findElement(By.name("group"))).selectByValue(String.valueOf(id));
     }
 
 
