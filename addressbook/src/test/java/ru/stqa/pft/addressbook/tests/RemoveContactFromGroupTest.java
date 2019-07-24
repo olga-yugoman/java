@@ -42,6 +42,7 @@ public class RemoveContactFromGroupTest extends TestBase {
             GroupData group = groups.iterator().next();
             app.contact().addToGroup(contactBefore, group);
             app.goTo().homePage();
+            contactBefore.inGroup(group);
         }
 
         //получаем список групп контакта и выбираем одну
