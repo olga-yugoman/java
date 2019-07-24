@@ -1,0 +1,14 @@
+apply plugin: 'java'
+apply plugin: 'application'
+mainClassName = "ru.stqa.pft.sandbox.MyFirstProgram"
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.testng:testng:6.14.3'
+    implementation 'com.google.code.gson:gson:2.8.5'
+    implementation 'org.apache.httpcomponents:httpclient:4.5.8'
+    implementation 'org.apache.httpcomponents:fluent-hc:4.5.8'
+}
