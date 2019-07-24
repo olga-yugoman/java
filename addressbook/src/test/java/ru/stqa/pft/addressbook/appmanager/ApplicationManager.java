@@ -29,8 +29,8 @@ public class ApplicationManager {
     private DbHelper dbHelper;
 
     public ApplicationManager(String browser) {
-        this.browser = browser;
         properties = new Properties();
+        this.browser = browser;
     }
 
     public void init()  throws IOException {
