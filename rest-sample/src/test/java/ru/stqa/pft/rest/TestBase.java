@@ -15,9 +15,7 @@ import java.util.Set;
 public class TestBase {
 
     public boolean isIssueOpen(int issueId) throws IOException {
-        Set<Issue> allIssues = getIssues();
-        Issue issue = allIssues.stream().filter((i) -> issueId == i.getId()).findFirst()
-                .orElseThrow(() -> new RuntimeException(String.format("Issue with id %s was not found", issueId)));
+        Issue issue = getIssueById(issueId);
         return issue.getStateName().equals("Open");
     }
 
@@ -42,6 +40,19 @@ public class TestBase {
 
         return new Gson().fromJson(issues, new TypeToken<Set<Issue>>() {
         }.getType());
+    }
+
+    public Issue getIssueById(int issueId) throws IOException {
+        String json = getExecutor().execute(
+                Request.Get(String.format("http://bugify.stqa.ru/api/issues/%s.json?limit=500", issueId)))
+                .returnContent().asString();
+
+        JsonElement parsed = new JsonParser().parse(json);
+        JsonElement issues = parsed.getAsJsonObject().get("issues");
+        Set<Issue> issuesSet = new Gson().fromJson(issues, new TypeToken<Set<Issue>>() {
+        }.getType());
+
+        return issuesSet.iterator().next();
     }
 
     public int createIssue(Issue newIssue) throws IOException {
