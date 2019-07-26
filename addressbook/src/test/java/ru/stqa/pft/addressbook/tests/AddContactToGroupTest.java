@@ -7,6 +7,7 @@ import ru.stqa.pft.addressbook.model.Contacts;
 import ru.stqa.pft.addressbook.model.GroupData;
 import ru.stqa.pft.addressbook.model.Groups;
 
+import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.hasItem;
 import static org.hamcrest.MatcherAssert.*;
 
@@ -17,6 +18,7 @@ public class AddContactToGroupTest extends TestBase {
         if (app.db().groups().size() == 0) {
             app.goTo().groupPage();
             app.group().create(new GroupData().withName("group1"));
+            app.goTo().homePage();
         }
 
         if (app.db().contacts().size() == 0) {
@@ -27,13 +29,27 @@ public class AddContactToGroupTest extends TestBase {
 
     @Test
     public void testAddContactToGroup() {
-        Contacts allContacts = app.db().contacts();
-        Groups groups = app.db().groups();
-        ContactData contactToAdd = allContacts.iterator().next();
-        GroupData group = groups.iterator().next();
-        app.contact().addToGroup(contactToAdd, group);
-        app.goTo().homePage();
+        //получаем все контакты из БД и выбираем контакт для теста
+        Contacts allContactsBefore = app.db().contacts();
+        ContactData contactBefore = allContactsBefore.iterator().next();
 
-        assertThat(contactToAdd.getGroups(), hasItem(group));
+        //получаем все группы из БД и выбираем группу, в которую добавить
+        Groups groups = app.db().groups();
+        GroupData group = groups.iterator().next();
+
+        //добавили контакт в группу
+        app.contact().addToGroup(contactBefore, group);
+
+        //получаем из БД обновленный список контактов, выбираем тестовый контакт по id, получаем актуальный список его групп
+        Contacts allContactsAfter = app.db().contacts();
+        ContactData contactAfter = allContactsAfter
+                .stream()
+                .filter(c -> contactBefore.getId() == c.getId())
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException(String.format("Contact with id %s was not found", contactBefore.getId())));
+        Groups groupsOfContactAfter = contactAfter.getGroups();
+
+        assertThat(groupsOfContactAfter, equalTo(contactBefore.getGroups().withAdded(group)));
+        //assertThat(groupsOfContactAfter, hasItem(group));
     }
 }
